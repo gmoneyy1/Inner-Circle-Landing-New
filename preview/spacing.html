@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Spacing — Scale</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 24px; background: #18181b; color: #fff; font-family: var(--ic-font-serif); }
+  .row { display: flex; flex-direction: column; gap: 10px; }
+  .item { display: grid; grid-template-columns: 70px 1fr 80px; align-items: center; gap: 14px; }
+  .bar { height: 14px; background: linear-gradient(90deg, #34d399, #10b981); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.2); }
+  .name { font-family: var(--ic-font-mono); font-size: 11px; color: #d4d4d8; }
+  .px { font-family: var(--ic-font-mono); font-size: 11px; color: #71717a; text-align: right; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="item"><span class="name">--space-1</span><div class="bar" style="width:4px;"></div><span class="px">4px</span></div>
+    <div class="item"><span class="name">--space-2</span><div class="bar" style="width:8px;"></div><span class="px">8px</span></div>
+    <div class="item"><span class="name">--space-3</span><div class="bar" style="width:12px;"></div><span class="px">12px</span></div>
+    <div class="item"><span class="name">--space-4</span><div class="bar" style="width:16px;"></div><span class="px">16px</span></div>
+    <div class="item"><span class="name">--space-6</span><div class="bar" style="width:24px;"></div><span class="px">24px</span></div>
+    <div class="item"><span class="name">--space-8</span><div class="bar" style="width:32px;"></div><span class="px">32px</span></div>
+    <div class="item"><span class="name">--space-12</span><div class="bar" style="width:48px;"></div><span class="px">48px</span></div>
+    <div class="item"><span class="name">--space-16</span><div class="bar" style="width:64px;"></div><span class="px">64px</span></div>
+  </div>
+</body>
+</html>

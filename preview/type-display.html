@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Type — Display & headings</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 22px 24px; background: #18181b; color: #fff; }
+  .item { display: grid; grid-template-columns: 90px 1fr; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.07); }
+  .item:last-child { border-bottom: none; }
+  .tag { font-family: var(--ic-font-mono); font-size: 10px; color: #71717a; }
+</style>
+</head>
+<body>
+  <div class="item"><span class="tag">display 48</span><span class="ic-display">your network knows best</span></div>
+  <div class="item"><span class="tag">h1 36/600</span><span class="ic-h1">Inner Circle</span></div>
+  <div class="item"><span class="tag">h2 24/600</span><span class="ic-h2">My Circle</span></div>
+  <div class="item"><span class="tag">h3 18/600</span><span class="ic-h3">Beauty in Rye</span></div>
+</body>
+</html>

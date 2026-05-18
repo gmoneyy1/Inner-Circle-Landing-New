@@ -1,0 +1,256 @@
+/* ============================================================
+   Inner Circle — Colors & Type Foundations
+   ============================================================
+   Tokens distilled from Inner-Circle-main/src/index.css and the
+   default dark theme used throughout the app. Two themes are
+   provided: the default "ink" (dark zinc) theme used for product
+   surfaces, and the optional "photobooth" watercolor theme used
+   for the editorial / brand-forward variant.
+
+   Variable naming follows: --ic-<role>-<rank>  (color)
+                            --ic-text-<role>    (semantic text)
+                            --ic-radius-<size>  (radii)
+                            etc.
+   ============================================================ */
+
+/* ── Webfonts (Google Fonts; loaded via index.html in the source app) ── */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ===== Brand neutrals (the "ink" palette) ===== */
+  --ic-bg:            #18181b;  /* page background, zinc-900 */
+  --ic-bg-elev-1:     #27272a;  /* zinc-800 — cards on dark */
+  --ic-bg-elev-2:     #3f3f46;  /* zinc-700 — pressed / heavy */
+  --ic-surface:       rgba(255, 255, 255, 0.06);  /* glass card */
+  --ic-surface-hi:    rgba(255, 255, 255, 0.10);  /* glass hover */
+  --ic-hairline:      rgba(255, 255, 255, 0.08);  /* card border */
+  --ic-hairline-hi:   rgba(255, 255, 255, 0.12);
+
+  /* Off-dark + greys for tints */
+  --ic-zinc-300:      #d4d4d8;
+  --ic-zinc-400:      #a1a1aa;
+  --ic-zinc-500:      #71717a;
+  --ic-zinc-600:      #52525b;
+  --ic-zinc-700:      #3f3f46;
+  --ic-zinc-800:      #27272a;
+  --ic-zinc-900:      #18181b;
+
+  /* Light theme neutrals (for the optional light mode) */
+  --ic-paper:         #f9fafb;  /* gray-50 */
+  --ic-paper-card:    #ffffff;
+  --ic-paper-line:    #e5e7eb;  /* gray-200 */
+  --ic-ink-900:       #111827;  /* gray-900 — primary text on light */
+  --ic-ink-700:       #374151;  /* gray-700 */
+  --ic-ink-500:       #6b7280;  /* gray-500 */
+  --ic-ink-400:       #9ca3af;  /* gray-400 */
+
+  /* ===== Semantic text (dark default) ===== */
+  --ic-text-strong:   #ffffff;
+  --ic-text:          #e4e4e7;   /* body on dark */
+  --ic-text-muted:    #a1a1aa;   /* secondary */
+  --ic-text-faint:    #71717a;   /* tertiary, hints */
+  --ic-text-dim:      #52525b;
+
+  /* ===== Category accent ramp =====
+     Each category is rendered as a 2-stop gradient orb. The
+     hex stops mirror the Tailwind `from-X-400 → to-X-500` pairs
+     used throughout SERVICES / CATEGORY_COLORS. */
+  --ic-cat-beauty-a:        #fb7185;  --ic-cat-beauty-b:        #f43f5e;  /* rose */
+  --ic-cat-health-a:        #34d399;  --ic-cat-health-b:        #10b981;  /* emerald */
+  --ic-cat-home-a:          #60a5fa;  --ic-cat-home-b:          #3b82f6;  /* blue */
+  --ic-cat-family-a:        #38bdf8;  --ic-cat-family-b:        #0ea5e9;  /* sky */
+  --ic-cat-pets-a:          #fbbf24;  --ic-cat-pets-b:          #f59e0b;  /* amber */
+  --ic-cat-food-a:          #fb923c;  --ic-cat-food-b:          #f97316;  /* orange */
+  --ic-cat-professional-a:  #818cf8;  --ic-cat-professional-b:  #6366f1;  /* indigo */
+  --ic-cat-auto-a:          #94a3b8;  --ic-cat-auto-b:          #64748b;  /* slate */
+  --ic-cat-wellness-a:      #f472b6;  --ic-cat-wellness-b:      #ec4899;  /* pink */
+  --ic-cat-education-a:     #22d3ee;  --ic-cat-education-b:     #06b6d4;  /* cyan */
+  --ic-cat-events-a:        #a78bfa;  --ic-cat-events-b:        #8b5cf6;  /* violet */
+  --ic-cat-shopping-a:      #facc15;  --ic-cat-shopping-b:      #eab308;  /* yellow */
+
+  /* ===== Status / signal ===== */
+  --ic-trust:         #10b981;   /* emerald — "your friends use" */
+  --ic-trust-soft:    #6ee7b7;
+  --ic-lock:          #71717a;   /* zinc — private / locked */
+  --ic-warn:          #f59e0b;
+  --ic-danger:        #ef4444;
+  --ic-link:          #93c5fd;
+
+  /* ===== Radii — soft, generous ===== */
+  --ic-radius-xs:     6px;
+  --ic-radius-sm:     8px;
+  --ic-radius-md:     12px;
+  --ic-radius-lg:     16px;   /* rounded-2xl */
+  --ic-radius-xl:     20px;
+  --ic-radius-2xl:    24px;   /* rounded-3xl */
+  --ic-radius-pill:   9999px;
+
+  /* ===== Elevation ===== */
+  --ic-shadow-card:        0 8px 32px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --ic-shadow-card-light:  0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(17, 24, 39, 0.06);
+  --ic-shadow-pop:         0 4px 16px rgba(0, 0, 0, 0.35);
+  --ic-glow-orb:           0 0 10px rgba(255, 255, 255, 0.35);
+
+  /* ===== Spacing scale (4px base) ===== */
+  --ic-space-1: 4px;
+  --ic-space-2: 8px;
+  --ic-space-3: 12px;
+  --ic-space-4: 16px;
+  --ic-space-5: 20px;
+  --ic-space-6: 24px;
+  --ic-space-8: 32px;
+  --ic-space-10: 40px;
+  --ic-space-12: 48px;
+  --ic-space-16: 64px;
+
+  /* ===== Motion ===== */
+  --ic-ease:               cubic-bezier(0.16, 1, 0.3, 1);
+  --ic-dur-fast:           120ms;
+  --ic-dur:                200ms;
+  --ic-dur-slow:           350ms;
+  --ic-orbit-speed:        90s;          /* full rotation of an orbit */
+  --ic-float-1:            float-1 8s ease-in-out infinite;
+  --ic-float-2:            float-2 10s ease-in-out infinite;
+  --ic-float-3:            float-3 9s ease-in-out infinite;
+
+  /* ============================================================
+     TYPOGRAPHY
+     ============================================================
+     Three families:
+       Lora            — primary. Used everywhere in product.
+                         Editorial serif; humanist; feels personal,
+                         like a hand-written recommendation.
+       Cormorant Garamond — display serif for hero / poster moments
+                         (loaded but used sparingly in source).
+       Fredoka         — playful sans for the "innie" mascot voice;
+                         used in friendly UI moments (.font-fredoka).
+     ============================================================ */
+  --ic-font-serif:    'Lora', Georgia, 'Times New Roman', serif;
+  --ic-font-display:  'Cormorant Garamond', 'Lora', Georgia, serif;
+  --ic-font-mascot:   'Fredoka', 'Lora', system-ui, sans-serif;
+  --ic-font-mono:     ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  /* Sizes — tracking the Tailwind text scale used in the app */
+  --ic-size-xs:    11px;   /* labels, tooltips (text-[11px]) */
+  --ic-size-sm:    12px;   /* meta */
+  --ic-size-base:  14px;   /* body */
+  --ic-size-md:    16px;   /* body-lg */
+  --ic-size-lg:    18px;
+  --ic-size-xl:    20px;
+  --ic-size-2xl:   24px;
+  --ic-size-3xl:   30px;
+  --ic-size-4xl:   36px;
+  --ic-size-display: 48px;
+
+  /* Weights */
+  --ic-weight-regular:  400;
+  --ic-weight-medium:   500;
+  --ic-weight-semibold: 600;
+  --ic-weight-bold:     700;
+
+  /* Tracking — semibold headings get -0.01em "tracking-tight" */
+  --ic-tracking-tight:   -0.01em;
+  --ic-tracking-normal:  0;
+  --ic-tracking-wide:    0.04em;
+  --ic-tracking-wider:   0.08em;
+}
+
+/* ============================================================
+   Photobooth theme — watercolor / ink-on-wet-paper alt skin.
+   Activate with: html[data-theme="photobooth"]  or  .ic-photobooth
+   ============================================================ */
+:root[data-theme="photobooth"],
+.ic-photobooth {
+  --ic-bg:          #0a1628;   /* deep navy base */
+  --ic-bg-elev-1:   rgba(8, 30, 40, 0.35);
+  --ic-bg-elev-2:   rgba(8, 30, 40, 0.50);
+  --ic-surface:     rgba(8, 30, 40, 0.35);
+  --ic-surface-hi:  rgba(8, 30, 40, 0.50);
+  --ic-hairline:    #1a2a33;
+  --ic-hairline-hi: #1a2a33;
+  --ic-text-strong: #f2f1ea;   /* warm off-white ink */
+  --ic-text:        #f2f1ea;
+  --ic-text-muted:  rgba(242, 241, 234, 0.75);
+  --ic-text-faint:  rgba(242, 241, 234, 0.55);
+  --ic-trust:       #2e5862;   /* muted teal — never neon */
+  --ic-shadow-card: none;
+}
+
+/* ============================================================
+   Semantic typography utility classes.
+   Use these in HTML cards & UI kits as a quick on-ramp.
+   ============================================================ */
+.ic-display {
+  font-family: var(--ic-font-display);
+  font-size: var(--ic-size-display);
+  font-weight: var(--ic-weight-medium);
+  letter-spacing: var(--ic-tracking-tight);
+  line-height: 1.05;
+}
+.ic-h1 {
+  font-family: var(--ic-font-serif);
+  font-size: var(--ic-size-4xl);
+  font-weight: var(--ic-weight-semibold);
+  letter-spacing: var(--ic-tracking-tight);
+  line-height: 1.1;
+}
+.ic-h2 {
+  font-family: var(--ic-font-serif);
+  font-size: var(--ic-size-2xl);
+  font-weight: var(--ic-weight-semibold);
+  letter-spacing: var(--ic-tracking-tight);
+  line-height: 1.2;
+}
+.ic-h3 {
+  font-family: var(--ic-font-serif);
+  font-size: var(--ic-size-lg);
+  font-weight: var(--ic-weight-semibold);
+  line-height: 1.3;
+}
+.ic-eyebrow {
+  font-family: var(--ic-font-serif);
+  font-size: var(--ic-size-xs);
+  font-weight: var(--ic-weight-medium);
+  letter-spacing: var(--ic-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ic-text-faint);
+}
+.ic-body {
+  font-family: var(--ic-font-serif);
+  font-size: var(--ic-size-base);
+  font-weight: var(--ic-weight-regular);
+  line-height: 1.55;
+  color: var(--ic-text);
+}
+.ic-body-lg {
+  font-family: var(--ic-font-serif);
+  font-size: var(--ic-size-md);
+  line-height: 1.6;
+  color: var(--ic-text);
+}
+.ic-meta {
+  font-family: var(--ic-font-serif);
+  font-size: var(--ic-size-xs);
+  color: var(--ic-text-faint);
+}
+.ic-mascot {
+  font-family: var(--ic-font-mascot);
+  font-weight: var(--ic-weight-medium);
+  letter-spacing: 0;
+}
+.ic-italic-quote {
+  font-family: var(--ic-font-serif);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Convenience: page-level defaults if you want to drop the system in wholesale */
+.ic-root {
+  font-family: var(--ic-font-serif);
+  background: var(--ic-bg);
+  color: var(--ic-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

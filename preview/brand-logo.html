@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Brand — Logo lockup</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 20px; background: #18181b; color: #fff; font-family: var(--ic-font-serif); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .lockup { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 14px; }
+  .lockup.light { background: #fff; color: #18181b; border-color: #e5e7eb; }
+  .mark { width: 44px; height: 44px; border-radius: 9999px; background: #fff; display: flex; align-items: center; justify-content: center; }
+  .mark.dark { background: #18181b; }
+  .mark svg { color: #18181b; }
+  .mark.dark svg { color: #fff; }
+  .name { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; font-family: 'Lora', serif; }
+  .tag { font-family: var(--ic-font-mono); font-size: 10px; color: #71717a; margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="lockup">
+    <div class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    <div><div class="name">Inner Circle</div><div class="tag">primary · dark</div></div>
+  </div>
+  <div class="lockup light">
+    <div class="mark dark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    <div><div class="name">Inner Circle</div><div class="tag">primary · light</div></div>
+  </div>
+</body>
+</html>

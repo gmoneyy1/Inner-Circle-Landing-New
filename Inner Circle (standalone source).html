@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inner Circle, the people you trust, by service.</title>
+<link rel="icon" href="assets/favicon.ico" />
+<link rel="stylesheet" href="colors_and_type.css" />
+<template id="__bundler_thumbnail" data-bg-color="#18181b">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+        <stop offset="60%" stop-color="#ffffff" stop-opacity="0.05"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fb7185"/><stop offset="100%" stop-color="#f43f5e"/>
+      </linearGradient>
+      <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#34d399"/><stop offset="100%" stop-color="#10b981"/>
+      </linearGradient>
+      <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#3b82f6"/>
+      </linearGradient>
+      <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/>
+      </linearGradient>
+      <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f472b6"/><stop offset="100%" stop-color="#ec4899"/>
+      </linearGradient>
+      <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#8b5cf6"/>
+      </linearGradient>
+    </defs>
+    <circle cx="600" cy="400" r="320" fill="url(#halo)"/>
+    <circle cx="600" cy="400" r="240" fill="none" stroke="rgba(255,255,255,0.18)" stroke-dasharray="6 8"/>
+    <circle cx="600" cy="400" r="160" fill="none" stroke="rgba(255,255,255,0.10)" stroke-dasharray="6 8"/>
+    <circle cx="600" cy="400" r="78" fill="#fff"/>
+    <text x="600" y="416" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="42" font-weight="500" fill="#18181b">IC</text>
+    <g>
+      <circle cx="600" cy="160" r="40" fill="url(#g1)"/>
+      <circle cx="808" cy="280" r="40" fill="url(#g2)"/>
+      <circle cx="808" cy="520" r="40" fill="url(#g3)"/>
+      <circle cx="600" cy="640" r="40" fill="url(#g4)"/>
+      <circle cx="392" cy="520" r="40" fill="url(#g5)"/>
+      <circle cx="392" cy="280" r="40" fill="url(#g6)"/>
+    </g>
+  </svg>
+</template>
+<style>
+  /* ---------------- Page foundation ---------------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ic-bg);
+    color: var(--ic-text);
+    font-family: var(--ic-font-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  ::selection { background: rgba(255,255,255,0.18); }
+
+  /* Ambient liquid glass blobs sitewide */
+  .ambient { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .ambient::before, .ambient::after { content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.55; }
+  .ambient::before { width: 720px; height: 720px; background: radial-gradient(circle, rgba(129,140,248,0.30), transparent 70%); top: -260px; left: -200px; }
+  .ambient::after { width: 620px; height: 620px; background: radial-gradient(circle, rgba(244,114,182,0.22), transparent 70%); top: 40%; right: -200px; }
+  .grain { display: none; }
+
+  /* Layout shells */
+  .page { position: relative; z-index: 2; }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+  /* ---------------- Nav ---------------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(24,24,27,0.55);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--ic-font-display); font-size: 20px; font-weight: 500; }
+  .brand-mark { width: 32px; height: 32px; border-radius: 50%; background: #fff; color: #18181b;
+    display: grid; place-items: center; }
+  .brand-mark svg { display: block; }
+  .nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; color: var(--ic-text-muted); }
+  .nav-links a { transition: color .2s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.08); }
+  .nav-biz { position: relative; }
+  .nav-biz > button { background: transparent; border: 0; color: var(--ic-text-muted); font-family: var(--ic-font-serif); font-size: 13px;
+    display: inline-flex; align-items: center; gap: 4px; cursor: pointer; padding: 0; }
+  .nav-biz > button:hover, .nav-biz.open > button { color: #fff; }
+  .nav-biz > button svg { transition: transform .2s; }
+  .nav-biz.open > button svg { transform: rotate(180deg); }
+  .nav-pop { position: absolute; top: calc(100% + 14px); right: 0; min-width: 220px;
+    background: rgba(24,24,27,0.95); backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 8px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5); opacity: 0; transform: translateY(-4px); pointer-events: none;
+    transition: opacity .2s var(--ic-ease), transform .2s var(--ic-ease); }
+  .nav-biz.open .nav-pop { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .nav-pop a { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; color: rgba(255,255,255,0.9); text-decoration: none; }
+  .nav-pop a:hover { background: rgba(255,255,255,0.06); color: #fff; }
+  .nav-pop a .pop-t { font-size: 13px; font-weight: 500; }
+  .nav-pop a .pop-d { font-size: 11px; color: var(--ic-text-faint); line-height: 1.4; }
+  .btn { border: none; border-radius: 12px; padding: 11px 20px; font-size: 14px; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 8px; transition: all .25s var(--ic-ease); }
+  .btn-primary { background: #fff; color: #18181b; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,255,255,0.12); }
+  .btn-ghost { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.10); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.10); }
+  @media (max-width: 768px) { .nav-links > a:not(.btn), .nav-biz, .nav-sep { display: none; } }
+
+  /* ---------------- Hero ---------------- */
+  .hero { padding: 80px 0 110px; position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+  @media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .hero h1 {
+    font-family: var(--ic-font-display); font-weight: 500;
+    font-size: clamp(48px, 7.5vw, 96px); line-height: 1.0; letter-spacing: -0.02em;
+    margin: 0 0 24px;
+  }
+  .hero h1 .ital { font-style: italic; color: rgba(255,255,255,0.7); }
+  .hero h1 .underline { background: linear-gradient(180deg, transparent 70%, rgba(110,231,183,0.45) 70%); padding: 0 0.05em; }
+  .hero-sub { font-size: 19px; line-height: 1.5; color: rgba(255,255,255,0.72); max-width: 520px; margin: 0 0 32px; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-meta { margin-top: 36px; display: flex; align-items: center; gap: 14px; color: var(--ic-text-faint); font-size: 13px; }
+  .ava-row { display: flex; }
+  .ava-row .ava { margin-left: -8px; border: 2px solid #18181b; }
+  .ava-row .ava:first-child { margin-left: 0; }
+  .ava { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 10px; }
+  .pill-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px;
+    border: 1px solid rgba(255,255,255,0.10); border-radius: 999px;
+    background: rgba(255,255,255,0.03);
+    font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+    margin-bottom: 24px;
+  }
+  .dot-live { width: 6px; height: 6px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399; animation: pulse-soft 2s infinite; }
+
+  /* ---------------- Orbit (hero graphic) ---------------- */
+  .orbit-wrap { position: relative; aspect-ratio: 1; max-width: 520px; margin: 0 auto; width: 100%; }
+  .ring { position: absolute; inset: 0; border: 1px dashed rgba(255,255,255,0.12); border-radius: 50%; }
+  .ring.r2 { inset: 14%; border-color: rgba(255,255,255,0.10); }
+  .ring.r3 { inset: 28%; border-color: rgba(255,255,255,0.07); }
+  .halo { position: absolute; inset: 36%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+    animation: pulse-soft 4s ease-in-out infinite;
+  }
+  .center-you {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 96px; height: 96px; border-radius: 50%;
+    background: linear-gradient(180deg, #fff, #e4e4e7);
+    color: #18181b;
+    display: grid; place-items: center;
+    font-family: var(--ic-font-display); font-weight: 600; font-size: 22px;
+    box-shadow: 0 12px 40px rgba(255,255,255,0.18), inset 0 1px 0 rgba(0,0,0,0.05);
+  }
+  .center-you::after { content: 'YOU'; position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+    font-family: var(--ic-font-serif); color: var(--ic-text-faint); font-size: 11px; letter-spacing: 0.20em; }
+  .spin { position: absolute; inset: 0; animation: orbit-spin 80s linear infinite; }
+  .spin-rev { animation: orbit-spin 80s linear infinite reverse; }
+  .anti { animation: orbit-spin 80s linear infinite reverse; }
+  @keyframes orbit-spin { to { transform: rotate(360deg); } }
+  @keyframes pulse-soft { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  .orb {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(var(--a)) translate(var(--r)) rotate(calc(-1 * var(--a)));
+  }
+  .orb-inner { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .orb .ava-lg { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+    color: #fff; font-weight: 600; font-size: 13px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 10px 24px rgba(0,0,0,0.30); }
+  .orb .lbl { font-size: 10px; color: rgba(255,255,255,0.85); white-space: nowrap; }
+  .orb .sub { font-size: 9px; color: var(--ic-text-faint); white-space: nowrap; }
+
+  /* ---------------- Section primitive ---------------- */
+  section { padding: 100px 0; position: relative; }
+  section + section { border-top: 1px solid rgba(255,255,255,0.05); }
+  .eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ic-text-faint); font-weight: 500; }
+  h2.section-h {
+    font-family: var(--ic-font-display); font-weight: 500;
+    font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.01em;
+    margin: 14px 0 18px; max-width: 760px;
+  }
+  h2.section-h .ital { font-style: italic; color: rgba(255,255,255,0.55); }
+  .lede { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.72); max-width: 640px; margin: 0; }
+
+  /* ---------------- Compare strip ---------------- */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+  @media (max-width: 820px) { .compare { grid-template-columns: 1fr; } }
+  .card { background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; padding: 30px; }
+  .card .label { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--ic-text-faint); margin-bottom: 16px; }
+  .card.muted { opacity: 0.7; }
+  .stars { color: #fbbf24; font-size: 18px; letter-spacing: 2px; }
+  .quote-classic { font-family: var(--ic-font-serif); font-style: italic; font-size: 17px; line-height: 1.5; color: rgba(255,255,255,0.78); }
+  .by-anon { color: var(--ic-text-faint); font-size: 12px; margin-top: 10px; }
+  .card.trust { border-color: rgba(16,185,129,0.30); background:
+    radial-gradient(circle at 0% 0%, rgba(16,185,129,0.06), transparent 60%),
+    rgba(255,255,255,0.04);
+  }
+  .card.trust .label { color: #6ee7b7; }
+  .pill-trust { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px;
+    background: rgba(16,185,129,0.16); color: #6ee7b7; font-size: 11px; font-weight: 500; }
+
+  /* ---------------- How it works ---------------- */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
+  @media (max-width: 980px) { .steps { grid-template-columns: 1fr; } }
+  .step { padding: 32px; position: relative; overflow: hidden; }
+  .step h3 { font-family: var(--ic-font-serif); font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 12px; }
+  .step .num { font-family: var(--ic-font-display); font-style: italic; font-size: 64px; line-height: 1;
+    color: rgba(255,255,255,0.16); margin-bottom: 18px; }
+  .step p { font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.75); margin: 0; }
+  .step .preview { margin-top: 22px; height: 140px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(180deg, rgba(0,0,0,0.30), rgba(0,0,0,0.15)); display: grid; place-items: center; position: relative; overflow: hidden; padding: 14px; }
+
+  /* mini-preview graphics */
+  .pv-circle { display: grid; place-items: center; width: 100%; height: 100%; position: relative; }
+  .pv-circle .ring-mini { position: absolute; top: 50%; left: 50%; width: 96px; height: 96px; margin: -48px 0 0 -48px; border: 1px dashed rgba(255,255,255,0.20); border-radius: 50%; }
+  .pv-circle .you { width: 28px; height: 28px; border-radius: 50%; background: #fff; color: #18181b; display: grid; place-items: center; font-family: var(--ic-font-display); font-weight: 600; font-size: 10px; z-index: 2;
+    box-shadow: 0 4px 12px rgba(255,255,255,0.10); }
+  .pv-circle .orb-mini { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
+    display: grid; place-items: center; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 10px rgba(0,0,0,0.3); }
+  .pv-circle .orb-mini svg { width: 11px; height: 11px; stroke: #fff; }
+
+  .pv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; max-width: 240px; }
+  .pv-grid .tile { aspect-ratio: 1; border-radius: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    display: grid; place-items: center; color: rgba(228,228,231,0.9); transition: all .25s var(--ic-ease); }
+  .pv-grid .tile.featured { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); }
+  .pv-grid .tile svg { width: 14px; height: 14px; }
+
+  .pv-friends { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
+  .pv-friends .card-mini { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px;
+    padding: 10px 12px; display: flex; align-items: center; gap: 10px; width: 100%; max-width: 240px; }
+  .pv-friends .card-mini .ava-f { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 10px; flex-shrink: 0; }
+  .pv-friends .card-mini .col { flex: 1; min-width: 0; }
+  .pv-friends .card-mini .nm-f { font-size: 11px; font-weight: 600; color: #fff; }
+  .pv-friends .card-mini .ringlet { display: flex; gap: 3px; margin-top: 4px; }
+  .pv-friends .card-mini .ringlet .od { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25); }
+  .pv-friends .card-mini .lock { color: var(--ic-text-faint); font-size: 9px; letter-spacing: 0.06em; }
+
+  /* ---------------- App preview / device ---------------- */
+  .preview-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; margin-top: 24px; }
+  @media (max-width: 980px) { .preview-grid { grid-template-columns: 1fr; } }
+  .phone {
+    position: relative; aspect-ratio: 9/19;
+    max-width: 360px; margin: 0 auto;
+    border-radius: 44px;
+    background: linear-gradient(170deg, #2a2a30, #18181b);
+    padding: 12px;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .phone-screen { border-radius: 34px; height: 100%; overflow: hidden; position: relative; background: linear-gradient(180deg, #18181b, #0c0c10); }
+  .phone-notch { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 110px; height: 26px; border-radius: 999px; background: #000; z-index: 4; }
+  .ph-body { padding: 50px 20px 24px; height: 100%; overflow: hidden; position: relative; }
+  .ph-eyebrow { font-size: 9px; letter-spacing: 0.16em; color: var(--ic-text-faint); text-transform: uppercase; }
+  .ph-h { font-family: var(--ic-font-display); font-weight: 500; font-size: 24px; line-height: 1.1; margin: 4px 0 14px; }
+  .ph-orbit { position: relative; aspect-ratio: 1; margin: 12px auto 0; }
+  .ph-orbit .ring-mini { position: absolute; inset: 14%; border: 1px dashed rgba(255,255,255,0.18); border-radius: 50%; }
+  .ph-orbit .you-c { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #18181b; display: grid; place-items: center; font-size: 11px; font-weight: 600; font-family: var(--ic-font-display); z-index: 2; }
+  .ph-orbit .o {
+    position: absolute; width: 32px; height: 32px; margin: -16px 0 0 -16px;
+    border-radius: 50%; display: grid; place-items: center;
+    color: #fff; font-weight: 600; font-size: 9px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .ph-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .ph-list .row { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 10px 12px;
+    display: flex; align-items: center; gap: 10px; }
+  .ph-list .row .ava { width: 32px; height: 32px; font-size: 11px; }
+  .ph-list .row .meta-l { font-size: 11px; line-height: 1.3; flex: 1; }
+  .ph-list .row .meta-l .nm { font-weight: 600; }
+  .ph-list .row .meta-l .sb { color: var(--ic-text-faint); font-size: 10px; }
+  .ph-list .row .pill-trust { padding: 2px 7px; font-size: 9px; }
+
+  .feature-list { display: flex; flex-direction: column; gap: 24px; max-width: 480px; }
+  .feature-list .item { display: flex; gap: 16px; align-items: flex-start; }
+  .feature-list .item .icon {
+    width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
+    display: grid; place-items: center; color: #fff; font-family: var(--ic-font-display); font-style: italic;
+  }
+  .feature-list h4 { font-family: var(--ic-font-serif); font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+  .feature-list p { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.7); margin: 0; }
+
+  /* ---------------- Categories grid ---------------- */
+  .cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; max-width: 920px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 980px) { .cats { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .cats { grid-template-columns: repeat(2, 1fr); } }
+  .cat { padding: 22px 14px; border-radius: 18px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; aspect-ratio: 1;
+    transition: all .25s var(--ic-ease); cursor: default; }
+  .cat:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); transform: translateY(-2px); }
+  .cat svg { stroke: rgba(228,228,231,0.9); margin-bottom: 4px; }
+  .cat .nm { font-size: 16px; font-weight: 500; color: #fff; }
+  .cat .sub { font-size: 13px; color: var(--ic-text-faint); }
+
+  /* ---------------- Town map ---------------- */
+  .map-card { margin-top: 56px; padding: 0; overflow: hidden; position: relative; min-height: 380px;
+    background: linear-gradient(140deg, rgba(99,102,241,0.10), rgba(244,114,182,0.06)), rgba(255,255,255,0.03); }
+  .map-content { padding: 40px 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  @media (max-width: 820px) { .map-content { grid-template-columns: 1fr; } }
+  .map-svg { width: 100%; height: 320px; }
+  .town-pin .pin-circ { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.30); }
+  .town-pin .pin-dot { fill: #fb7185; }
+  .town-pin .pin-label { fill: #fff; font-family: var(--ic-font-serif); font-size: 11px; font-weight: 500; }
+  .town-pin.live .pin-dot { fill: #34d399; }
+  .town-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+  .town-stats .stat .n { font-family: var(--ic-font-display); font-size: 36px; font-weight: 500; line-height: 1; }
+  .town-stats .stat .l { font-size: 11px; color: var(--ic-text-faint); margin-top: 6px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* ---------------- Quotes ---------------- */
+  .quotes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+  @media (max-width: 980px) { .quotes-grid { grid-template-columns: 1fr; } }
+  .quote-card { padding: 28px; }
+  .quote-card .body { font-family: var(--ic-font-serif); font-size: 18px; line-height: 1.5; font-style: italic;
+    color: rgba(255,255,255,0.92); margin: 0 0 22px; }
+  .quote-card .att { display: flex; align-items: center; gap: 12px; }
+  .quote-card .att .ava { width: 38px; height: 38px; font-size: 12px; }
+  .quote-card .att .nm { font-size: 13px; font-weight: 600; }
+  .quote-card .att .sb { font-size: 11px; color: var(--ic-text-faint); }
+
+  /* ---------------- Provider CTA ---------------- */
+  .provider-stack { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
+  .provider-card { padding: 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center;
+    background: linear-gradient(140deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  }
+  .promote-card { padding: 48px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: stretch;
+    background: linear-gradient(140deg, rgba(251,191,36,0.06), rgba(255,255,255,0.02));
+    border: 1px solid rgba(251,191,36,0.20);
+  }
+  @media (max-width: 820px) { .provider-card, .promote-card { grid-template-columns: 1fr; padding: 36px; } }
+  .promote-card .label-amber { color: #fcd34d; font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 500; }
+  .promote-tiers { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+  .promote-tiers .tier { padding: 14px 16px; border-radius: 14px; background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.08); display: flex; gap: 14px; align-items: flex-start; }
+  .promote-tiers .tier .badge { width: 28px; height: 28px; border-radius: 50%; background: rgba(251,191,36,0.12);
+    color: #fcd34d; display: grid; place-items: center; font-family: var(--ic-font-display); font-style: italic; font-size: 14px; flex-shrink: 0; }
+  .promote-tiers .tier .tier-name { font-weight: 600; font-size: 14px; color: #fff; }
+  .promote-tiers .tier .tier-d { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; line-height: 1.45; }
+  textarea.input { resize: vertical; min-height: 92px; font-family: var(--ic-font-serif); line-height: 1.5; }
+  .input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); color: #fff;
+    font-family: var(--ic-font-serif); font-size: 14px; padding: 13px 16px; border-radius: 12px; width: 100%; outline: none;
+    transition: border-color .2s; }
+  .input::placeholder { color: var(--ic-text-faint); }
+  .input:focus { border-color: rgba(255,255,255,0.4); }
+  .provider-form { display: flex; flex-direction: column; gap: 10px; }
+
+  /* ---------------- FAQ ---------------- */
+  .faq-list { display: flex; flex-direction: column; gap: 10px; margin-top: 40px; max-width: 880px; }
+  .faq-item { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 22px 26px;
+    transition: background .2s; cursor: pointer; }
+  .faq-item:hover { background: rgba(255,255,255,0.04); }
+  .faq-item.open { background: rgba(255,255,255,0.05); }
+  .faq-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq-q { font-family: var(--ic-font-serif); font-size: 18px; font-weight: 600; margin: 0; }
+  .faq-toggle { font-family: var(--ic-font-display); font-size: 24px; color: var(--ic-text-faint); transition: transform .25s var(--ic-ease); }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); color: #fff; }
+  .faq-a { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.72); max-width: 720px;
+    max-height: 0; overflow: hidden; transition: max-height .35s var(--ic-ease), margin-top .25s; margin-top: 0; }
+  .faq-item.open .faq-a { max-height: 220px; margin-top: 14px; }
+
+  /* ---------------- Plans ---------------- */
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+  @media (max-width: 820px) { .plans { grid-template-columns: 1fr; } }
+  .plan { padding: 36px; border-radius: 22px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08); position: relative; display: flex; flex-direction: column; gap: 18px; }
+  .plan.pro { background: linear-gradient(160deg, rgba(110,231,183,0.08), rgba(255,255,255,0.03)); border-color: rgba(110,231,183,0.22); }
+  .plan-tag { position: absolute; top: 22px; right: 22px; font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px; background: rgba(110,231,183,0.18); color: #6ee7b7; font-weight: 500; }
+  .plan-name { font-family: var(--ic-font-display); font-weight: 500; font-size: 28px; line-height: 1; margin: 0; }
+  .plan-name .ital { font-style: italic; color: rgba(255,255,255,0.55); }
+  .plan-price { display: flex; align-items: baseline; gap: 4px; }
+  .plan-price .n { font-family: var(--ic-font-display); font-weight: 500; font-size: 48px; line-height: 1; }
+  .plan-price .p { color: var(--ic-text-faint); font-size: 14px; }
+  .plan-lede { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.75); margin: 0; }
+  .plan-feats { list-style: none; padding: 0; margin: 4px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .plan-feats li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+  .plan-feats li .chk { color: #6ee7b7; font-family: var(--ic-font-display); font-style: italic; font-size: 20px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+  .plan .plan-cta { margin-top: auto; padding-top: 8px; }
+
+  .final-cta { padding: 120px 0; text-align: center; position: relative; }
+  .final-cta h2 {
+    font-family: var(--ic-font-display); font-weight: 500;
+    font-size: clamp(48px, 8vw, 96px); line-height: 1.0; letter-spacing: -0.02em;
+    margin: 0 0 24px; }
+  .final-cta h2 .ital { font-style: italic; color: rgba(255,255,255,0.6); }
+  .final-cta p { font-size: 18px; color: rgba(255,255,255,0.7); max-width: 480px; margin: 0 auto 36px; }
+  .signup { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; }
+  .signup .input { flex: 1; }
+  footer.foot { padding: 36px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+  .foot-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; color: var(--ic-text-faint); font-size: 12px; }
+  .foot-links { display: flex; gap: 24px; }
+  .foot-links a:hover { color: #fff; }
+
+  /* Utility */
+  .em-trust { color: #6ee7b7; }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+<div class="grain"></div>
+
+<div id="app" class="page"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+/* ==================== DATA ==================== */
+const ORBIT_PROVIDERS = [
+  { c: ['#fb7185','#f43f5e'], l: 'MS', n: "Maria's Salon",   s: 'Haircuts' },
+  { c: ['#34d399','#10b981'], l: 'RP', n: 'Rye Pilates',     s: 'Studio' },
+  { c: ['#60a5fa','#3b82f6'], l: 'TH', n: 'Tom · Handy',     s: 'Repairs' },
+  { c: ['#fbbf24','#f59e0b'], l: 'JK', n: 'Jake',            s: 'Dog walker' },
+  { c: ['#f472b6','#ec4899'], l: 'EL', n: 'Ella Park',       s: 'Math tutor' },
+  { c: ['#a78bfa','#8b5cf6'], l: 'BV', n: 'Bro Vintners',    s: 'Wine club' },
+  { c: ['#22d3ee','#06b6d4'], l: 'DR', n: 'Dr. Reyes',       s: 'Pediatrician' },
+];
+
+const CATEGORIES = [
+  { i: 'scissors',       n: 'Beauty',        s: '54' },
+  { i: 'heart',          n: 'Health',        s: '106' },
+  { i: 'home',           n: 'Home',          s: '56' },
+  { i: 'users',          n: 'Family',        s: '31' },
+  { i: 'dog',            n: 'Pets',          s: '36' },
+  { i: 'chef-hat',       n: 'Food',          s: '91' },
+  { i: 'briefcase',      n: 'Professional',  s: '149' },
+  { i: 'car',            n: 'Auto',          s: '20' },
+  { i: 'sparkles',       n: 'Wellness',      s: '12' },
+  { i: 'graduation-cap', n: 'Education',     s: '24' },
+  { i: 'camera',         n: 'Events',        s: '5' },
+  { i: 'shopping-bag',   n: 'Clothes',       s: '39' },
+];
+
+const QUOTES = [
+  { q: "I stopped Yelping. Now I just check what Liz actually re-books, that's the whole answer.",
+    n: 'Sarah C.', s: 'Rye, NY · Beta', av: 'SC', c: '#fb7185' },
+  { q: "Found our pediatrician, our handyman, and a babysitter in one weekend. From people I'd actually invite over.",
+    n: 'Marcus J.', s: 'Rye, NY · Beta', av: 'MJ', c: '#60a5fa' },
+  { q: "I was passing my barber's name around in texts anyway. Now it's just… on a list. That's it.",
+    n: 'Liz K.', s: 'Scarsdale · Beta', av: 'LK', c: '#34d399' },
+];
+
+const FAQS = [
+  ['Is this just Yelp with friends?', "No. Yelp shows you ratings from strangers. Inner Circle shows you what people in your actual social graph keep going back to. Re-booking is the signal, not a star."],
+  ['Where is it available?', "Early access is open in Rye, NY first, expanding through lower Westchester (Scarsdale, Bronxville, Mamaroneck, Larchmont) this summer."],
+  ['How much does it cost?', "Free. There's an optional ad-free tier later. We will never gate your friends' recommendations behind a paywall."],
+  ['Can I keep some providers private?', "Yes, every entry in your circle can be marked private. Friends see a lock icon and can request to unlock."],
+  ["What if my provider isn't listed?", "Add them in one tap. We auto-confirm with a quick text to your provider so they can claim and customize their listing, and so credit lands where credit's due."],
+  ["Who's building this?", "A team of two high schoolers ready to transform and digitize the world of service recommendations."],
+];
+
+const UsersIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </svg>
+);
+
+const CatIcon = ({ name, size = 28 }) => {
+  const paths = {
+    'scissors':       <g><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></g>,
+    'heart':          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>,
+    'home':           <g><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .71-1.53l7-6a2 2 0 0 1 2.58 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></g>,
+    'users':          <g><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>,
+    'dog':            <g><path d="M11.25 16.25h1.5L12 17z"/><path d="M16 14v.5"/><path d="M4.42 11.25A13 13 0 0 0 4 14.56C4 18.73 7.58 21 12 21s8-2.27 8-6.44a11.7 11.7 0 0 0-.49-3.31"/><path d="M8 14v.5"/><path d="M8.5 8.5c-.38 1.05-1.08 2.03-2.34 2.5-1.93.72-3.58-.3-3.66-1-.11-.99 1.18-6.53 4-7C8.42 2.68 10.15 3.85 10.15 5.24a7.5 7.5 0 0 1 3.85 0c0-1.39 1.84-2.6 3.77-2.28 2.82.47 4.11 6.01 4 7-.08.7-1.73 1.72-3.66 1-1.26-.47-1.85-1.45-2.24-2.5"/></g>,
+    'chef-hat':       <g><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.46.32-.85.73-1.04a4 4 0 0 0-2.13-7.59 5 5 0 0 0-9.19 0 4 4 0 0 0-2.14 7.59c.41.2.73.58.73 1.04V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></g>,
+    'briefcase':      <g><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></g>,
+    'car':            <g><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></g>,
+    'sparkles':       <g><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></g>,
+    'graduation-cap': <g><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></g>,
+    'camera':         <g><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></g>,
+    'shopping-bag':   <g><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></g>,
+  };
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      {paths[name]}
+    </svg>
+  );
+};
+
+const Avatar = ({ l, c, size = 28, fontSize, style }) => (
+  <div className="ava" style={{
+    width: size, height: size,
+    background: Array.isArray(c) ? `linear-gradient(135deg, ${c[0]}, ${c[1]})` : c,
+    fontSize: fontSize ?? Math.round(size * 0.36),
+    ...style,
+  }}>{l}</div>
+);
+
+/* ==================== NAV ==================== */
+function Nav() {
+  const [biz, setBiz] = useState(false);
+  const wrapRef = React.useRef(null);
+  React.useEffect(() => {
+    if (!biz) return;
+    const close = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setBiz(false); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, [biz]);
+  return (
+    <nav className="nav">
+      <div className="container nav-inner">
+        <a href="#" className="brand" style={{ textDecoration: 'none' }}>
+          <div className="brand-mark"><UsersIcon size={18} /></div>
+          <span>Inner Circle</span>
+        </a>
+        <div className="nav-links">
+          <a href="#about">About</a>
+          <a href="#how">How it works</a>
+          <a href="#plans">Plans</a>
+          <a href="#faq">FAQ</a>
+          <span className="nav-sep"></span>
+          <div ref={wrapRef} className={`nav-biz ${biz ? 'open' : ''}`}>
+            <button onClick={() => setBiz(!biz)}>
+              For business
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div className="nav-pop">
+              <a href="providers.html">
+                <span className="pop-t">For providers</span>
+                <span className="pop-d">Claim a free listing or boost reach in your town.</span>
+              </a>
+              <a href="advertise.html">
+                <span className="pop-t">Advertise</span>
+                <span className="pop-d">Brand partnerships for the right Westchester households.</span>
+              </a>
+            </div>
+          </div>
+          <a href="https://your-inner-circle.com" target="_blank" rel="noopener" className="btn btn-primary">Try now</a>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+/* ==================== HERO ==================== */
+function Orbit() {
+  const n = ORBIT_PROVIDERS.length;
+  return (
+    <div className="orbit-wrap">
+      <div className="ring"></div>
+      <div className="ring r2"></div>
+      <div className="ring r3"></div>
+      <div className="halo"></div>
+      <div className="center-you">IC</div>
+      <div className="spin">
+        {ORBIT_PROVIDERS.map((p, i) => {
+          const angle = (i / n) * 360;
+          return (
+            <div key={i} className="orb" style={{ '--a': `${angle}deg`, '--r': `200px` }}>
+              <div className="orb-inner anti" style={{ animation: 'orbit-spin 80s linear infinite reverse' }}>
+                <div className="ava-lg" style={{ background: `linear-gradient(135deg, ${p.c[0]}, ${p.c[1]})` }}>{p.l}</div>
+                <div className="lbl">{p.n}</div>
+                <div className="sub">{p.s}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="hero" data-screen-label="01 Hero">
+      <div className="container hero-grid">
+        <div>
+          <h1>
+            your network<br/>
+            <span className="ital">knows</span> <span className="underline">best.</span>
+          </h1>
+          <p className="hero-sub">
+            Stop scrolling anonymous reviews. See which barbers, tutors, plumbers, and trainers the people you actually trust keep re-booking.
+          </p>
+          <div className="hero-cta">
+            <a href="https://your-inner-circle.com" target="_blank" rel="noopener" className="btn btn-primary">Try now →</a>
+            <button className="btn btn-ghost">I'm a local provider</button>
+          </div>
+        </div>
+        <Orbit />
+      </div>
+    </section>
+  );
+}
+
+/* ==================== COMPARE ==================== */
+function Compare() {
+  return (
+    <section id="about" data-screen-label="02 Compare">
+      <div className="container">
+        <div className="eyebrow">About</div>
+        <h2 className="section-h">Same question, <span className="ital">different answer.</span></h2>
+        <p className="lede">When you need a haircut, a piano teacher, or someone to fix the dryer, you don't ask Google. You text Sarah. We built the product version of that.</p>
+        <div className="compare">
+          <div className="card muted">
+            <div className="label">How you used to do it</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+              <span className="stars">★★★★★</span>
+              <span style={{ color: 'var(--ic-text-faint)', fontSize: 12 }}>4.6 · 312 reviews</span>
+            </div>
+            <p className="quote-classic">"Great service, would recommend!"</p>
+            <p className="by-anon">— username_4827, 2 years ago, never met</p>
+          </div>
+          <div className="card trust">
+            <div className="label">How Inner Circle does it</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <div className="ava-row">
+                {[['SC','#fb7185'],['LK','#34d399'],['MJ','#60a5fa']].map(([l,c],i)=> <Avatar key={i} l={l} c={c} />)}
+              </div>
+              <span className="pill-trust">Sarah, Liz &amp; 1 other re-book</span>
+            </div>
+            <p className="quote-classic">"She's the only one I trust with my hair."</p>
+            <p className="by-anon">— Sarah, your friend, last Tuesday</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== HOW IT WORKS ==================== */
+function PreviewCircle() {
+  const items = [
+    { i: 'scissors',       c: ['#fb7185','#f43f5e'] },
+    { i: 'heart',          c: ['#34d399','#10b981'] },
+    { i: 'home',           c: ['#60a5fa','#3b82f6'] },
+    { i: 'dog',            c: ['#fbbf24','#f59e0b'] },
+    { i: 'chef-hat',       c: ['#fb923c','#f97316'] },
+    { i: 'graduation-cap', c: ['#a78bfa','#8b5cf6'] },
+  ];
+  return (
+    <div className="pv-circle">
+      <div className="ring-mini"></div>
+      <div className="you">YOU</div>
+      {items.map((it, i) => {
+        const a = (i / items.length) * Math.PI * 2 - Math.PI / 2;
+        const r = 48; // px
+        const x = r * Math.cos(a);
+        const y = r * Math.sin(a);
+        return (
+          <div key={i} className="orb-mini" style={{
+            top: `calc(50% + ${y}px)`, left: `calc(50% + ${x}px)`,
+            background: `linear-gradient(135deg, ${it.c[0]}, ${it.c[1]})`,
+          }}>
+            <CatIcon name={it.i} size={11} />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+function PreviewGrid() {
+  const cats = [
+    { i: 'scissors',       feat: true },
+    { i: 'heart',          feat: true },
+    { i: 'home',           feat: true },
+    { i: 'users',          feat: false },
+    { i: 'dog',            feat: false },
+    { i: 'chef-hat',       feat: true },
+    { i: 'briefcase',      feat: false },
+    { i: 'car',            feat: false },
+  ];
+  return (
+    <div className="pv-grid">
+      {cats.map((c, i) => (
+        <div key={i} className={`tile ${c.feat ? 'featured' : ''}`}>
+          <CatIcon name={c.i} size={14} />
+        </div>
+      ))}
+    </div>
+  );
+}
+function PreviewFriends() {
+  const friends = [
+    { l: 'SC', c: '#fb7185', n: 'Sarah C.', dots: ['#fb7185','#34d399','#60a5fa','#fbbf24'] },
+    { l: 'LK', c: '#34d399', n: 'Liz K.',   dots: ['#a78bfa','#fb923c','#22d3ee'], locked: true },
+  ];
+  return (
+    <div className="pv-friends">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%', maxWidth: 240 }}>
+        {friends.map((f, i) => (
+          <div key={i} className="card-mini">
+            <div className="ava-f" style={{ background: f.c }}>{f.l}</div>
+            <div className="col">
+              <div className="nm-f">{f.n}</div>
+              <div className="ringlet">
+                {f.dots.map((d, j) => <div key={j} className="od" style={{ background: d }}></div>)}
+                {f.locked && <span className="lock">+ 2 locked</span>}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function HowItWorks() {
+  const steps = [
+    { n: '01', t: 'MyCircle', d: 'Your personal orbit of trusted providers, organized by category with you at the center. Lock the ones you want to keep private.', preview: <PreviewCircle /> },
+    { n: '02', t: 'MyEcosystem', d: 'Browse the wider Westchester ecosystem, trending providers, nearby picks, and the people quietly powering them.', preview: <PreviewGrid /> },
+    { n: '03', t: 'MyFriends', d: "See who your friends trust. Tap into their circles, request access to locked picks, and never start from zero again.", preview: <PreviewFriends /> },
+  ];
+  return (
+    <section id="how" data-screen-label="03 How it works">
+      <div className="container">
+        <div className="eyebrow">How it works</div>
+        <h2 className="section-h">Three views of the same question, <span className="ital">who do my people use for this?</span></h2>
+        <div className="steps">
+          {steps.map(s => (
+            <div key={s.n} className="card step">
+              <div className="num">{s.n}</div>
+              <h3>{s.t}</h3>
+              <p>{s.d}</p>
+              <div className="preview">{s.preview}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== PHONE PREVIEW ==================== */
+function PhonePreview() {
+  return (
+    <div className="phone">
+      <div className="phone-screen">
+        <div className="phone-notch"></div>
+        <div className="ph-body">
+          <div className="ph-eyebrow">MyCircle</div>
+          <div className="ph-h">7 trusted</div>
+          <div className="ph-orbit">
+            <div className="ring-mini"></div>
+            <div className="you-c">JD</div>
+            {ORBIT_PROVIDERS.slice(0,6).map((p, i) => {
+              const total = 6;
+              const ang = (i / total) * Math.PI * 2 - Math.PI / 2;
+              const r = 36; // % from center, sits on the ring
+              const x = 50 + r * Math.cos(ang);
+              const y = 50 + r * Math.sin(ang);
+              return (
+                <div key={i} className="o" style={{
+                  top: `${y}%`, left: `${x}%`,
+                  background: `linear-gradient(135deg, ${p.c[0]}, ${p.c[1]})` }}>
+                  {p.l}
+                </div>
+              );
+            })}
+          </div>
+          <div className="ph-list">
+            {ORBIT_PROVIDERS.slice(0,3).map((p, i) => (
+              <div key={i} className="row">
+                <Avatar l={p.l} c={p.c} size={32} />
+                <div className="meta-l">
+                  <div className="nm">{p.n}</div>
+                  <div className="sb">{p.s}</div>
+                </div>
+                <span className="pill-trust">3 friends</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProductPreview() {
+  return (
+    <section data-screen-label="04 Product">
+      <div className="container">
+        <div className="eyebrow">In the app</div>
+        <h2 className="section-h">Your circle, <span className="ital">on a page.</span></h2>
+        <div className="preview-grid">
+          <PhonePreview />
+          <div className="feature-list">
+            <div className="item">
+              <div className="icon">1</div>
+              <div>
+                <h4>One screen, one truth</h4>
+                <p>Every provider you trust, sorted by recency, not by stars. The list you'd give a friend over coffee, finally in one place.</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="icon">2</div>
+              <div>
+                <h4>Receipts, not ratings</h4>
+                <p>The signal isn't a 5-star review, it's that <em>three</em> friends keep going back. We surface re-booking, not opinion.</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="icon">3</div>
+              <div>
+                <h4>Privacy as a primitive</h4>
+                <p>Mark any provider private. Your therapist, your divorce lawyer, the back-channel mechanic, friends see a lock and ask.</p>
+              </div>
+            </div>
+            <div className="item">
+              <div className="icon">4</div>
+              <div>
+                <h4>Circle Assistant</h4>
+                <p>A friendly in-app helper that reads your circle and answers questions like "who do my friends use for haircuts?" in plain language.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== CATEGORIES ==================== */
+function Categories() {
+  return (
+    <section id="categories" data-screen-label="05 Categories">
+      <div className="container">
+        <div className="eyebrow">What it covers</div>
+        <h2 className="section-h">Twelve categories. <span className="ital">Same question every time.</span></h2>
+        <p className="lede">From haircuts to handymen, sitters to CPAs, the slate that covers about 95% of what households actually re-book on. We added the categories you don't talk about: therapists, lawyers, divorce attorneys. Mark them private; friends see a lock.</p>
+        <div className="cats">
+          {CATEGORIES.map(cat => (
+            <div key={cat.n} className="cat">
+              <CatIcon name={cat.i} />
+              <div className="nm">{cat.n}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== TOWN ==================== */
+function TownMap() {
+  // schematic positions for Westchester villages
+  const towns = [
+    { n: 'Rye',         x: 78, y: 60, live: true },
+    { n: 'Mamaroneck',  x: 62, y: 50, live: false },
+    { n: 'Larchmont',   x: 50, y: 56, live: false },
+    { n: 'Scarsdale',   x: 36, y: 32, live: false },
+    { n: 'Bronxville',  x: 22, y: 60, live: false },
+    { n: 'Harrison',    x: 60, y: 22, live: false },
+  ];
+  return (
+    <svg className="map-svg" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+        </pattern>
+      </defs>
+      <rect width="320" height="280" fill="url(#grid)" />
+      {/* schematic coast / waterline */}
+      <path d="M 250 0 Q 240 80 280 140 Q 300 200 250 280 L 320 280 L 320 0 Z" fill="rgba(96,165,250,0.06)" />
+      <path d="M 250 0 Q 240 80 280 140 Q 300 200 250 280" fill="none" stroke="rgba(96,165,250,0.20)" strokeWidth="1" strokeDasharray="3 4"/>
+      {/* connecting lines from Rye */}
+      {towns.slice(1).map((t, i) => {
+        const rye = towns[0];
+        return <line key={i} x1={rye.x * 320/100} y1={rye.y * 280/100} x2={t.x * 320/100} y2={t.y * 280/100}
+          stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="2 3" />;
+      })}
+      {towns.map(t => (
+        <g key={t.n} className={`town-pin ${t.live ? 'live' : ''}`}>
+          <circle className="pin-circ" cx={t.x * 320/100} cy={t.y * 280/100} r={t.live ? 14 : 8} />
+          <circle className="pin-dot" cx={t.x * 320/100} cy={t.y * 280/100} r={t.live ? 6 : 3}>
+            {t.live && <animate attributeName="r" values="5;9;5" dur="2s" repeatCount="indefinite" />}
+          </circle>
+          <text className="pin-label" x={t.x * 320/100 + (t.x > 50 ? 18 : -18)} y={t.y * 280/100 + 4}
+            textAnchor={t.x > 50 ? 'start' : 'end'}>{t.n}{t.live ? ' · live' : ''}</text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+function Town() {
+  return (
+    <section data-screen-label="06 Town">
+      <div className="container">
+        <div className="eyebrow">Local first</div>
+        <h2 className="section-h">Built for Rye. <span className="ital">Then the rest of Westchester.</span></h2>
+        <p className="lede">We're starting hyperlocal on purpose. A circle only works if your friends are in it, so we're filling Rye block-by-block before we open the next village. Get on the waitlist; we'll text you the day your town goes live.</p>
+        <div className="card map-card">
+          <div className="map-content">
+            <TownMap />
+            <div>
+              <h3 style={{ fontFamily: "var(--ic-font-display)", fontWeight: 500, fontSize: 32, margin: '0 0 14px' }}>
+                Rye is live. The neighbors are <em style={{ color: '#a1a1aa' }}>queued.</em>
+              </h3>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.7)', margin: '0 0 24px', maxWidth: 380 }}>
+                The denser a town's circle, the better the recommendations get. We open a new town when 200 households are on the waitlist.
+              </p>
+              <div className="town-stats">
+                <div className="stat"><div className="n em-trust">240+</div><div className="l">Rye households</div></div>
+                <div className="stat"><div className="n">1,840</div><div className="l">Providers vouched for</div></div>
+                <div className="stat"><div className="n">5</div><div className="l">Towns queued</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== QUOTES ==================== */
+function Quotes() {
+  return (
+    <section data-screen-label="07 Quotes">
+      <div className="container">
+        <div className="eyebrow">From the beta</div>
+        <h2 className="section-h">Already the way <span className="ital">our beta families find people.</span></h2>
+        <div className="quotes-grid">
+          {QUOTES.map((q, i) => (
+            <div key={i} className="card quote-card">
+              <p className="body">"{q.q}"</p>
+              <div className="att">
+                <Avatar l={q.av} c={q.c} size={38} />
+                <div>
+                  <div className="nm">{q.n}</div>
+                  <div className="sb">{q.s}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== PROVIDER CTA ==================== */
+function Providers() {
+  return (
+    <section id="providers" data-screen-label="08 Providers">
+      <div className="container">
+        <div className="eyebrow">For providers</div>
+        <h2 className="section-h">Get credit where the recs <span className="ital">already happen.</span></h2>
+        <p className="lede">If you're already the name being texted around Rye, the barber, the piano teacher, the guy who actually shows up, make sure your work is credited. Listings are free. The trust ranking is never for sale. But if you want extra reach, we have a few honest ways to do that too.</p>
+        <div className="provider-stack">
+        <div className="card provider-card">
+          <div>
+            <h3 style={{ fontFamily: "var(--ic-font-display)", fontWeight: 500, fontSize: 30, margin: '0 0 14px', lineHeight: 1.1 }}>
+              Two minutes. <span style={{ fontStyle: 'italic', color: '#a1a1aa' }}>One free listing.</span>
+            </h3>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {['Verified by your existing clients, not a paid review','Profile, hours, photos, booking link','Trust ranking is never for sale, the orbit reflects real re-booking'].map((t, i) => (
+                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 15, color: 'rgba(255,255,255,0.8)' }}>
+                  <span style={{ color: '#6ee7b7', fontFamily: "var(--ic-font-display)", fontStyle: 'italic', fontSize: 22 }}>✓</span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="provider-form">
+            <input className="input" placeholder="Business name" />
+            <input className="input" placeholder="Email" />
+            <input className="input" placeholder="Town (Rye, Scarsdale, …)" />
+            <button className="btn btn-primary" style={{ justifyContent: 'center', padding: '14px' }}>Apply to list →</button>
+          </div>
+        </div>
+
+        <div className="card promote-card">
+          <div>
+            <div className="label-amber">Promote your business</div>
+            <h3 style={{ fontFamily: "var(--ic-font-display)", fontWeight: 500, fontSize: 30, margin: '10px 0 12px', lineHeight: 1.1 }}>
+              Reach more <span style={{ fontStyle: 'italic', color: '#a1a1aa' }}>of the right neighbors.</span>
+            </h3>
+            <p style={{ fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.72)', margin: 0, maxWidth: 460 }}>
+              For providers who want extra visibility, we run a few small, clearly-labeled promotion slots. Tell us what you're after and we'll send pricing and availability.
+            </p>
+            <div className="promote-tiers">
+              <div className="tier">
+                <div className="badge">I</div>
+                <div>
+                  <div className="tier-name">Town spotlight</div>
+                  <div className="tier-d">Featured placement in the Ecosystem header for your town and category. Labeled "Sponsored", always.</div>
+                </div>
+              </div>
+              <div className="tier">
+                <div className="badge">II</div>
+                <div>
+                  <div className="tier-name">Category boost</div>
+                  <div className="tier-d">Higher position in the relevant category listings, after friend-vouched providers.</div>
+                </div>
+              </div>
+              <div className="tier">
+                <div className="badge">III</div>
+                <div>
+                  <div className="tier-name">Local newsletter</div>
+                  <div className="tier-d">A mention in our weekly town-level digest sent to active households.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="provider-form">
+            <input className="input" placeholder="Business name" />
+            <input className="input" placeholder="Email" />
+            <input className="input" placeholder="Phone (optional)" />
+            <select className="input" defaultValue="" style={{ appearance: 'none', WebkitAppearance: 'none', cursor: 'pointer' }}>
+              <option value="" disabled style={{ background: '#18181b' }}>What are you interested in?</option>
+              <option value="spotlight" style={{ background: '#18181b' }}>Town spotlight</option>
+              <option value="category" style={{ background: '#18181b' }}>Category boost</option>
+              <option value="newsletter" style={{ background: '#18181b' }}>Local newsletter</option>
+              <option value="other" style={{ background: '#18181b' }}>Something else, let's talk</option>
+            </select>
+            <textarea className="input" placeholder="Tell us a bit about your business and what you're trying to grow." />
+            <a href="mailto:partners@your-inner-circle.com?subject=Promotion%20inquiry" className="btn btn-primary" style={{ justifyContent: 'center', padding: '14px', textDecoration: 'none' }}>Request info →</a>
+            <p style={{ fontSize: 11, color: 'var(--ic-text-faint)', margin: '4px 0 0', textAlign: 'center', lineHeight: 1.5 }}>
+              Or email <a href="mailto:partners@your-inner-circle.com" style={{ color: 'rgba(255,255,255,0.7)' }}>partners@your-inner-circle.com</a> directly.
+            </p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== ADVERTISING ==================== */
+function Advertising() {
+  return (
+    <section id="advertising" data-screen-label="09 Advertising">
+      <div className="container">
+        <div className="eyebrow">Brand partnerships</div>
+        <h2 className="section-h">Advertise with <span className="ital">Inner Circle.</span></h2>
+        <p className="lede">Inner Circle households are the people who already pay for the good stuff, the tutors, the trainers, the right plumber on the first call. If you're a brand that wants to reach affluent Westchester families in a context they actually trust, let's talk.</p>
+        <div className="card provider-card" style={{ marginTop: 24 }}>
+          <div>
+            <h3 style={{ fontFamily: "var(--ic-font-display)", fontWeight: 500, fontSize: 30, margin: '0 0 14px', lineHeight: 1.1 }}>
+              Reach the right <span style={{ fontStyle: 'italic', color: '#a1a1aa' }}>240+ households, not 240,000 strangers.</span>
+            </h3>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {['Town-level banner placements in MyEcosystem','Newsletter sponsorship in our weekly digest','Co-branded events and seasonal guides','Always clearly labeled, we never blur ads into recommendations'].map((t, i) => (
+                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 15, color: 'rgba(255,255,255,0.8)' }}>
+                  <span style={{ color: '#6ee7b7', fontFamily: "var(--ic-font-display)", fontStyle: 'italic', fontSize: 22 }}>✓</span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="provider-form">
+            <input className="input" placeholder="Company" />
+            <input className="input" placeholder="Your name" />
+            <input className="input" placeholder="Work email" />
+            <textarea className="input" placeholder="What you're trying to reach, audience, region, budget range." />
+            <a href="mailto:advertising@your-inner-circle.com?subject=Advertising%20inquiry" className="btn btn-primary" style={{ justifyContent: 'center', padding: '14px', textDecoration: 'none' }}>Get the media kit →</a>
+            <p style={{ fontSize: 11, color: 'var(--ic-text-faint)', margin: '4px 0 0', textAlign: 'center', lineHeight: 1.5 }}>
+              Or email <a href="mailto:advertising@your-inner-circle.com" style={{ color: 'rgba(255,255,255,0.7)' }}>advertising@your-inner-circle.com</a> directly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== PLANS ==================== */
+function Plans() {
+  return (
+    <section id="plans" data-screen-label="08 Plans">
+      <div className="container">
+        <div className="eyebrow">Plans</div>
+        <h2 className="section-h">Free for everyone. <span className="ital">A little more for the people who want it.</span></h2>
+        <p className="lede">The trusted recommendations are free, full stop. Pro is for people who want to skip the ads, tune privacy more tightly, and get a bit more back from the providers they book.</p>
+        <div className="plans">
+          <div className="plan">
+            <h3 className="plan-name">Inner Circle</h3>
+            <div className="plan-price"><span className="n">Free</span><span className="p">/forever</span></div>
+            <p className="plan-lede">The default tier, and the engine of everything good about the platform. Get on, add the people you trust, see what your friends actually re-book.</p>
+            <ul className="plan-feats">
+              <li><span className="chk">✓</span> Full MyCircle, MyEcosystem &amp; MyFriends access</li>
+              <li><span className="chk">✓</span> Add unlimited providers to your circle</li>
+              <li><span className="chk">✓</span> See friends' shared providers and repeat-booking signals</li>
+              <li><span className="chk">✓</span> Earn points and cashback for adding providers and booking through the app</li>
+              <li><span className="chk">✓</span> Contextual, clearly-labeled in-feed ads and sponsored placements in category lists</li>
+            </ul>
+            <div className="plan-cta">
+              <a href="https://your-inner-circle.com" target="_blank" rel="noopener" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '14px' }}>Try now →</a>
+            </div>
+          </div>
+          <div className="plan pro">
+            <span className="plan-tag">Pro</span>
+            <h3 className="plan-name">Inner Circle <span className="ital">Pro</span></h3>
+            <div className="plan-price"><span className="n">$4.99</span><span className="p">/month</span></div>
+            <p className="plan-lede">For households who use Inner Circle daily and want a quieter, more private, more rewarding version of it.</p>
+            <ul className="plan-feats">
+              <li><span className="chk">✓</span> Ad-free experience, no in-feed ads, no sponsored category placements</li>
+              <li><span className="chk">✓</span> Enhanced privacy controls, granularly hide categories (therapist, mechanic, lawyer) from specific friends or circles</li>
+              <li><span className="chk">✓</span> 2× points on bookings and faster cashback redemption</li>
+              <li><span className="chk">✓</span> Early access to providers in newly-launched towns as we expand</li>
+            </ul>
+            <div className="plan-cta">
+              <a href="#" onClick={(e) => e.preventDefault()} className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '14px', opacity: 0.7, cursor: 'default' }}>Coming soon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== FAQ ==================== */
+function Faq() {
+  const [open, setOpen] = useState(0);
+  return (
+    <section id="faq" data-screen-label="09 FAQ">
+      <div className="container">
+        <div className="eyebrow">Frequently asked</div>
+        <h2 className="section-h">Questions <span className="ital">people actually ask.</span></h2>
+        <div className="faq-list">
+          {FAQS.map(([q, a], i) => (
+            <div key={i} className={`faq-item ${open === i ? 'open' : ''}`} onClick={() => setOpen(open === i ? -1 : i)}>
+              <div className="faq-row">
+                <h3 className="faq-q">{q}</h3>
+                <span className="faq-toggle">+</span>
+              </div>
+              <div className="faq-a">{a}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ==================== FINAL CTA ==================== */
+function FinalCTA() {
+  return (
+    <section className="final-cta" data-screen-label="10 CTA">
+      <div className="container">
+        <h2>your network<br /><span className="ital">is the algorithm.</span></h2>
+        <p>Real recommendations from real friends. No more guessing.</p>
+        <a href="https://your-inner-circle.com" target="_blank" rel="noopener" className="btn btn-primary" style={{ padding: '16px 32px', fontSize: 16 }}>Try now →</a>
+      </div>
+    </section>
+  );
+}
+
+function Foot() {
+  return (
+    <footer className="foot">
+      <div className="container foot-inner">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div className="brand-mark" style={{ width: 26, height: 26 }}><UsersIcon size={14} /></div>
+          <span style={{ fontFamily: 'var(--ic-font-display)', fontWeight: 500, fontSize: 15, color: '#fff' }}>Inner Circle</span>
+          <span>· Rye, NY · ©2026</span>
+        </div>
+        <div className="foot-links">
+          <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="providers.html">For providers</a><a href="advertise.html">Advertise</a><a href="mailto:hello@your-inner-circle.com">Contact</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <Nav />
+      <Hero />
+      <Compare />
+      <HowItWorks />
+      <ProductPreview />
+      <Categories />
+      <Quotes />
+      <Plans />
+      <Faq />
+      <FinalCTA />
+      <Foot />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+</script>
+</body>
+</html>

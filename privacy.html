@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy, Inner Circle</title>
+<link rel="icon" href="assets/favicon.ico" />
+<link rel="stylesheet" href="colors_and_type.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--ic-bg); color: var(--ic-text); font-family: var(--ic-font-serif);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  a { color: inherit; }
+  a.link { color: #93c5fd; text-decoration: none; border-bottom: 1px solid rgba(147,197,253,0.3); }
+  a.link:hover { border-bottom-color: rgba(147,197,253,0.8); }
+
+  .ambient { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .ambient::before { content: ''; position: absolute; width: 720px; height: 720px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(129,140,248,0.20), transparent 70%); filter: blur(120px);
+    top: -260px; left: -200px; }
+
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(24,24,27,0.7);
+    backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .nav-inner { max-width: 980px; margin: 0 auto; padding: 18px 32px; display: flex; justify-content: space-between; align-items: center; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--ic-font-display); font-size: 20px; font-weight: 500; text-decoration: none; }
+  .brand-mark { width: 32px; height: 32px; border-radius: 50%; background: #fff; color: #18181b;
+    display: grid; place-items: center; }
+  .brand-mark svg { display: block; }
+  .back { color: var(--ic-text-faint); font-size: 13px; text-decoration: none; }
+  .back:hover { color: #fff; }
+
+  main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 80px 32px 100px; }
+  @media (max-width: 640px) { main { padding: 56px 24px 80px; } }
+
+  .eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ic-text-faint); font-weight: 500; }
+  h1 { font-family: var(--ic-font-display); font-weight: 500;
+    font-size: clamp(48px, 7vw, 80px); line-height: 1.0; letter-spacing: -0.02em;
+    margin: 16px 0 22px; }
+  h1 .ital { font-style: italic; color: rgba(255,255,255,0.55); }
+  .lede { font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.78); max-width: 580px; }
+  .meta-row { display: flex; gap: 18px; flex-wrap: wrap; color: var(--ic-text-faint); font-size: 13px; margin: 28px 0 56px;
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); }
+
+  h2 { font-family: var(--ic-font-serif); font-size: 28px; font-weight: 600; letter-spacing: -0.01em;
+    line-height: 1.2; margin: 64px 0 14px; }
+  h2 .num { font-family: var(--ic-font-display); font-style: italic; color: rgba(255,255,255,0.4); margin-right: 12px; }
+  h3 { font-family: var(--ic-font-serif); font-size: 18px; font-weight: 600; margin: 32px 0 10px; color: rgba(255,255,255,0.95); }
+  p { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.82); margin: 0 0 16px; }
+  p strong { color: #fff; font-weight: 600; }
+  p em { color: rgba(255,255,255,0.92); }
+
+  ul { padding-left: 22px; margin: 0 0 18px; }
+  ul li { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.82); margin-bottom: 8px; }
+  ul li::marker { color: rgba(255,255,255,0.35); }
+
+  .callout {
+    margin: 24px 0; padding: 20px 24px; border-radius: 18px;
+    background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.25);
+  }
+  .callout .label { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: #6ee7b7; margin-bottom: 8px; }
+  .callout p { margin: 0; font-size: 15px; }
+
+  .toc { background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px;
+    padding: 24px 28px; margin: 0 0 56px; }
+  .toc .label { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--ic-text-faint); margin-bottom: 14px; }
+  .toc ol { padding-left: 22px; margin: 0; columns: 2; column-gap: 32px; }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+  .toc ol li { font-size: 14px; line-height: 1.6; margin-bottom: 6px; break-inside: avoid; }
+  .toc a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .toc a:hover { color: #fff; }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0 24px; font-size: 14px; }
+  table th, table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06);
+    vertical-align: top; line-height: 1.5; }
+  table th { color: rgba(255,255,255,0.95); font-weight: 600; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; border-bottom-color: rgba(255,255,255,0.18); }
+  table td { color: rgba(255,255,255,0.78); }
+
+  hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 56px 0; }
+
+  footer { padding: 36px 0; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 80px; }
+  .foot-inner { max-width: 980px; margin: 0 auto; padding: 0 32px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; color: var(--ic-text-faint); font-size: 12px; }
+  .foot-links { display: flex; gap: 24px; }
+  .foot-links a { text-decoration: none; }
+  .foot-links a:hover { color: #fff; }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="Inner Circle.html" class="brand">
+      <div class="brand-mark"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <span>Inner Circle</span>
+    </a>
+    <a href="Inner Circle.html" class="back">← Back to site</a>
+  </div>
+</nav>
+
+<main>
+  <div class="eyebrow">Legal</div>
+  <h1>Privacy <span class="ital">policy.</span></h1>
+  <p class="lede">Inner Circle exists because you trust the people in your circle. We work hard to deserve that trust at the platform level too. Here is what we collect, what we do with it, and, equally important, what we will never do.</p>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="label">Contents</div>
+    <ol>
+      <li><a href="#scope">Scope &amp; who we are</a></li>
+      <li><a href="#what">What we collect</a></li>
+      <li><a href="#how">How we collect it</a></li>
+      <li><a href="#why">Why we use it</a></li>
+      <li><a href="#sharing">How information is shared</a></li>
+      <li><a href="#never">What we will never do</a></li>
+      <li><a href="#friends">Friends &amp; visibility</a></li>
+      <li><a href="#private">Private &amp; locked providers</a></li>
+      <li><a href="#provider-data">Provider data &amp; listings</a></li>
+      <li><a href="#contacts">Contacts &amp; phone matching</a></li>
+      <li><a href="#location">Location data</a></li>
+      <li><a href="#cookies">Cookies &amp; similar tech</a></li>
+      <li><a href="#retention">How long we keep data</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#rights">Your rights &amp; choices</a></li>
+      <li><a href="#california">California (CCPA/CPRA)</a></li>
+      <li><a href="#children">Children</a></li>
+      <li><a href="#third-party">Third-party services</a></li>
+      <li><a href="#international">International transfers</a></li>
+      <li><a href="#changes">Changes to this policy</a></li>
+      <li><a href="#contact">Contact us</a></li>
+    </ol>
+  </nav>
+
+  <section id="scope">
+    <h2><span class="num">01</span>Scope &amp; who we are</h2>
+    <p>This Privacy Policy explains how Inner Circle, Inc. ("Inner Circle," "we," "us," or "our") collects, uses, and shares information when you use our website at <a class="link" href="https://your-inner-circle.com">your-inner-circle.com</a>, our mobile application, and any related services that link to this policy (collectively, the "Service").</p>
+    <p>Inner Circle is a trust-based local-services platform. Instead of anonymous reviews from strangers, the platform shows you which local providers, barbers, tutors, plumbers, pediatricians, and so on, the people in your real social circle actually use and re-book. The product is built around your relationships, which means a lot of what we handle is inherently social. We take that seriously.</p>
+    <p>If you have any questions about this policy, our practices, or your rights, see the <a href="#contact" class="link">Contact us</a> section at the bottom.</p>
+  </section>
+
+  <section id="what">
+    <h2><span class="num">02</span>What we collect</h2>
+    <p>We collect three broad categories of information: <em>what you tell us</em>, <em>what your friends tell us about you</em>, and <em>what your device and usage tells us</em>.</p>
+
+    <h3>Account &amp; profile information</h3>
+    <ul>
+      <li><strong>Account basics:</strong> name, display name, email address, phone number (optional), avatar image, town, and short biography you choose to write.</li>
+      <li><strong>Authentication:</strong> if you sign in with Google, we receive your name, email, and profile photo. We do not receive your Google password.</li>
+      <li><strong>Profile settings:</strong> theme preference, notification preferences, and similar.</li>
+    </ul>
+
+    <h3>Your circle &amp; recommendations</h3>
+    <ul>
+      <li><strong>Providers you add:</strong> business name, service category, optional notes, phone, website, and the fact that you have re-booked them.</li>
+      <li><strong>Privacy markers:</strong> whether each provider is public, private to everyone, or hidden from specific friends.</li>
+      <li><strong>Activity:</strong> requests to unlock private providers, approvals you grant, and friend connections.</li>
+    </ul>
+
+    <h3>Information from your friends</h3>
+    <ul>
+      <li>When a friend adds you to their circle or sends you a friend request, we record their action.</li>
+      <li>When a friend invites you via phone number, we may match it against your account if you have provided your number.</li>
+    </ul>
+
+    <h3>Device &amp; usage data</h3>
+    <ul>
+      <li><strong>Device info:</strong> device type, operating system, browser type, language, time zone, IP address (used for coarse location and abuse prevention).</li>
+      <li><strong>Usage:</strong> pages visited, actions taken, feature interactions, performance and crash data.</li>
+      <li><strong>Approximate location:</strong> derived from IP, or from precise GPS coordinates if you opt in to "Use my location" for the Explore feature.</li>
+    </ul>
+
+    <h3>Communications</h3>
+    <ul>
+      <li>Messages you send to support, feedback, or chats with our in-app assistant.</li>
+      <li>Email and SMS engagement: whether you opened or clicked.</li>
+    </ul>
+  </section>
+
+  <section id="how">
+    <h2><span class="num">03</span>How we collect it</h2>
+    <p>We collect information in three ways:</p>
+    <ul>
+      <li><strong>Directly from you</strong> when you sign up, add a provider, send a friend request, fill out a form, or message support.</li>
+      <li><strong>Automatically</strong> through standard web and mobile telemetry (cookies, log files, SDK events, error reports).</li>
+      <li><strong>From third parties</strong> like Google (for authentication), Supabase (for hosted database and auth), and public business directories such as OpenStreetMap or licensed Yelp data feeds (for provider metadata only, never personal data about users).</li>
+    </ul>
+  </section>
+
+  <section id="why">
+    <h2><span class="num">04</span>Why we use it</h2>
+    <table>
+      <thead><tr><th>Purpose</th><th>What's involved</th></tr></thead>
+      <tbody>
+        <tr><td>Operate the service</td><td>Your account, circle, friends, privacy markers, location preference.</td></tr>
+        <tr><td>Show trusted recommendations</td><td>Cross-references between your friends' public circles and your category browsing.</td></tr>
+        <tr><td>Match phone numbers to existing users</td><td>One-way hash of phone numbers; we never store raw numbers we cannot match.</td></tr>
+        <tr><td>Enforce privacy</td><td>Filtering private providers from views your friends can see.</td></tr>
+        <tr><td>Improve the product</td><td>Aggregated, de-identified analytics, never tied back to individuals in reports.</td></tr>
+        <tr><td>Security &amp; abuse</td><td>Detect fraud, spam, scraping, and policy violations.</td></tr>
+        <tr><td>Comply with law</td><td>Respond to lawful requests, defend against legal claims.</td></tr>
+        <tr><td>Communicate with you</td><td>Service updates, security notices, optional product announcements.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="sharing">
+    <h2><span class="num">05</span>How information is shared</h2>
+    <p>We share data only in these specific situations:</p>
+    <ul>
+      <li><strong>With your friends</strong>, your public providers, name, and avatar are visible to people you have accepted as friends. Anything marked private stays private.</li>
+      <li><strong>With service providers we use</strong>, Supabase (database, auth, storage), Vercel (hosting), Google (auth), and analytics vendors who only see de-identified events. All of them are bound by contracts that limit use to providing services to us.</li>
+      <li><strong>For legal reasons</strong>, if compelled by valid legal process. We will challenge overbroad requests, and we will tell you unless we are legally prohibited from doing so.</li>
+      <li><strong>In a business transfer</strong>, if Inner Circle is acquired, merged, or restructured, your data may transfer to the successor, subject to this policy or a notice of any changes.</li>
+      <li><strong>With your explicit consent</strong>, for anything else, we ask first.</li>
+    </ul>
+  </section>
+
+  <section id="never">
+    <h2><span class="num">06</span>What we will never do</h2>
+    <p>These are not aspirations. They are commitments:</p>
+    <ul>
+      <li><strong>We will never sell your personal information</strong> to anyone, for any reason.</li>
+      <li><strong>We will never share your circle with advertisers</strong>, your providers are not ad-targeting data.</li>
+      <li><strong>We will never reveal a private provider</strong> to a friend you have not explicitly approved for that service.</li>
+      <li><strong>We will never sell or rent your contacts</strong> if you grant permission to scan them, we hash them, match them, and discard them.</li>
+      <li><strong>We will never train third-party AI on your data</strong>. The in-app assistant runs only on data you send it for the duration of your session.</li>
+      <li><strong>We will never block export or deletion</strong>. You can take everything with you and you can be forgotten.</li>
+    </ul>
+  </section>
+
+  <section id="friends">
+    <h2><span class="num">07</span>Friends &amp; visibility</h2>
+    <p>Friendships in Inner Circle are mutual and explicit, both people must accept. Once you are friends, the following is visible to one another:</p>
+    <ul>
+      <li>Your display name, avatar, town, and public bio.</li>
+      <li>Any provider on your circle that is not marked private.</li>
+      <li>The fact that you have re-booked a provider (when you do), but not the contents of any private communication.</li>
+    </ul>
+    <p>You can unfriend at any time. Unfriending immediately removes the other person's access to your circle and your access to theirs.</p>
+  </section>
+
+  <section id="private">
+    <h2><span class="num">08</span>Private &amp; locked providers</h2>
+    <p>Every provider you add can be marked private. Private providers do <em>not</em> appear in any friend's view of your circle. A friend will only see that you have private providers in the aggregate (e.g., "3 private services") if you have allowed the count to be visible, and they cannot see categories, names, or any other detail.</p>
+    <p>If a friend asks to unlock a specific category, you receive a request and choose to approve it, decline it, or ignore it. Approvals can be revoked at any time and apply only to the specific friend and specific service.</p>
+    <p>Server-side, private fields are filtered before data ever leaves the database for a friend's session. Bypassing it is not a UI trick, it requires you to grant permission.</p>
+  </section>
+
+  <section id="provider-data">
+    <h2><span class="num">09</span>Provider data &amp; listings</h2>
+    <p>Providers (the businesses on the platform) appear in two ways:</p>
+    <ul>
+      <li><strong>Listings you add</strong> in your own circle. We store what you give us and use it to power your view and your friends' aggregated views, subject to your privacy markers.</li>
+      <li><strong>Town-level directory listings</strong> imported from licensed business data sources (OpenStreetMap, OpenAddresses, licensed Yelp data). These are public records of business existence, they are not derived from any user's circle.</li>
+    </ul>
+    <p>If you are a provider and want a listing modified or removed, contact <a class="link" href="mailto:providers@your-inner-circle.com">providers@your-inner-circle.com</a>. We respond within five business days.</p>
+  </section>
+
+  <section id="contacts">
+    <h2><span class="num">10</span>Contacts &amp; phone matching</h2>
+    <p>If you choose to import contacts to find friends, we receive the phone numbers and display names of those contacts. We do the following:</p>
+    <ul>
+      <li>Hash each phone number using a one-way function before storing.</li>
+      <li>Match those hashes against the hashes of other Inner Circle users who have opted in to be discoverable by phone.</li>
+      <li>Discard the raw numbers immediately after matching.</li>
+      <li>Never message, contact, or share data with anyone in your contacts who is not already an Inner Circle user.</li>
+    </ul>
+    <p>You can revoke contact access at any time in Settings → Privacy. We delete your stored contact hashes upon revocation.</p>
+  </section>
+
+  <section id="location">
+    <h2><span class="num">11</span>Location data</h2>
+    <p>Location is used for two things: (1) deriving which town you are in for ecosystem browsing, and (2) showing distance to providers in Explore.</p>
+    <p>You can use the product without ever sharing precise location. If you do not grant precise location:</p>
+    <ul>
+      <li>We use approximate IP geolocation to suggest your town. You can override this with a manual town selection.</li>
+      <li>We do not display distance-from-you information until you opt in.</li>
+    </ul>
+    <p>We never track your location in the background. Location reads happen only when you actively use a location-aware feature.</p>
+  </section>
+
+  <section id="cookies">
+    <h2><span class="num">12</span>Cookies &amp; similar tech</h2>
+    <p>We use cookies and local storage for:</p>
+    <ul>
+      <li><strong>Strictly necessary</strong>, authentication, session continuity, anti-fraud. These cannot be disabled if you want to use the product.</li>
+      <li><strong>Functional</strong>, remembering your theme, last visited town, and similar preferences.</li>
+      <li><strong>Analytics</strong>, de-identified usage telemetry to help us improve the product.</li>
+    </ul>
+    <p>We do not use third-party advertising cookies. We do not allow third-party trackers on user-facing pages other than the analytics and error-reporting tools we list under <a href="#third-party" class="link">third-party services</a>.</p>
+  </section>
+
+  <section id="retention">
+    <h2><span class="num">13</span>How long we keep data</h2>
+    <p>We retain data only as long as needed for the purposes described in this policy:</p>
+    <ul>
+      <li><strong>Account &amp; circle:</strong> kept while your account is active and for 30 days after deletion, unless you request immediate deletion.</li>
+      <li><strong>Logs &amp; telemetry:</strong> 90 days, then aggregated or deleted.</li>
+      <li><strong>Phone hash matches:</strong> kept while the matching session is active; deleted within 24 hours otherwise.</li>
+      <li><strong>Communications with support:</strong> 12 months, for service quality and security.</li>
+      <li><strong>Legal/compliance records:</strong> as required by applicable law.</li>
+    </ul>
+  </section>
+
+  <section id="security">
+    <h2><span class="num">14</span>Security</h2>
+    <p>We use industry-standard safeguards including TLS in transit, encryption at rest for primary databases, scoped access controls, row-level security policies that enforce privacy markers at the database level, and a least-privilege model for engineers. We run regular vulnerability scans and patch critical issues within 72 hours.</p>
+    <p>No system is perfectly secure. If you believe your account has been compromised, contact us immediately at <a class="link" href="mailto:security@your-inner-circle.com">security@your-inner-circle.com</a>.</p>
+  </section>
+
+  <section id="rights">
+    <h2><span class="num">15</span>Your rights &amp; choices</h2>
+    <p>You have the following rights, regardless of where you live:</p>
+    <ul>
+      <li><strong>Access</strong>, see what we have about you. Settings → Privacy → Download my data.</li>
+      <li><strong>Correction</strong>, fix anything inaccurate.</li>
+      <li><strong>Deletion</strong>, delete your account and the data associated with it.</li>
+      <li><strong>Portability</strong>, export your circle, friends list, and history in a machine-readable format.</li>
+      <li><strong>Object</strong> to specific uses, such as product analytics, while continuing to use the service.</li>
+    </ul>
+    <p>To exercise any of these, use the in-app controls or email <a class="link" href="mailto:privacy@your-inner-circle.com">privacy@your-inner-circle.com</a>. We respond within 30 days.</p>
+  </section>
+
+  <section id="california">
+    <h2><span class="num">16</span>California (CCPA/CPRA)</h2>
+    <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act, as amended by the California Privacy Rights Act:</p>
+    <ul>
+      <li>The right to know what categories of personal information we have collected, the sources, purposes, and recipients.</li>
+      <li>The right to delete personal information.</li>
+      <li>The right to correct inaccurate personal information.</li>
+      <li>The right to opt out of "sale" or "sharing", we do not sell or share for cross-context behavioral advertising, so this is automatic.</li>
+      <li>The right to limit the use of sensitive personal information.</li>
+      <li>The right to non-discrimination for exercising your rights.</li>
+    </ul>
+    <p>You may designate an authorized agent to act on your behalf. We will verify the agent's authority and your identity before acting.</p>
+  </section>
+
+  <section id="children">
+    <h2><span class="num">18</span>Children</h2>
+    <p>Inner Circle is not intended for children under 16. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us and we will delete it promptly.</p>
+  </section>
+
+  <section id="third-party">
+    <h2><span class="num">19</span>Third-party services</h2>
+    <p>The following service providers handle data on our behalf, under contracts that limit them to providing services to us:</p>
+    <ul>
+      <li><strong>Supabase</strong>, primary database, authentication, file storage.</li>
+      <li><strong>Vercel</strong>, application hosting and edge runtime.</li>
+      <li><strong>Google</strong>, sign-in (only when you choose Google as your sign-in method).</li>
+      <li><strong>OpenAI</strong>, powers the in-app assistant ("Innie"). Conversations are not used for model training.</li>
+      <li><strong>Cloudflare</strong>, DNS, DDoS protection, content delivery.</li>
+      <li><strong>Sentry</strong>, error monitoring; personal data is scrubbed before transmission.</li>
+    </ul>
+  </section>
+
+  <section id="international">
+    <h2><span class="num">20</span>International transfers</h2>
+    <p>Inner Circle is operated from the United States. If you are using the service from outside the U.S., your information will be transferred to and processed in the U.S. We rely on Standard Contractual Clauses (SCCs) and equivalent safeguards where applicable.</p>
+  </section>
+
+  <section id="changes">
+    <h2><span class="num">21</span>Changes to this policy</h2>
+    <p>We will update this policy from time to time. When we make material changes, we will notify you by email or by a prominent notice in the app at least 14 days before the changes take effect. The "Last updated" date at the top reflects the most recent revision.</p>
+  </section>
+
+  <section id="contact">
+    <h2><span class="num">22</span>Contact us</h2>
+    <p>Questions, requests, complaints, or feedback go to:</p>
+    <p>
+      <strong>Inner Circle, Inc.</strong><br/>
+      Attn: Privacy<br/>
+      Rye, NY<br/>
+      <a class="link" href="mailto:privacy@your-inner-circle.com">privacy@your-inner-circle.com</a>
+    </p>
+    <p>For security-specific issues, please use <a class="link" href="mailto:security@your-inner-circle.com">security@your-inner-circle.com</a>. We aim to acknowledge security reports within 24 hours.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="brand-mark" style="width:26px; height:26px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <span style="font-family: var(--ic-font-display); font-weight: 500; font-size: 15px; color: #fff;">Inner Circle</span>
+      <span>· Rye, NY · ©2026</span>
+    </div>
+    <div class="foot-links">
+      <a href="Inner Circle.html">Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="mailto:hello@your-inner-circle.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

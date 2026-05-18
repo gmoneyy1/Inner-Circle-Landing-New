@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Components — Chips & pills</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 22px; background: #18181b; color: #fff; font-family: 'Lora', serif; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .label { font-family: var(--ic-font-mono); font-size: 10px; color: #71717a; width: 90px; flex-shrink: 0; }
+  .chip { padding: 7px 14px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.25); font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+  .chip.focused { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); box-shadow: 0 0 0 2px rgba(255,255,255,0.3); }
+  .pill { padding: 4px 9px; border-radius: 9999px; font-size: 11px; }
+  .pill.trust { background: rgba(16,185,129,0.18); color: #6ee7b7; }
+  .pill.lock { background: rgba(113,113,122,0.25); color: #d4d4d8; }
+  .pill.cat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #d4d4d8; }
+</style>
+</head>
+<body>
+  <div class="row"><span class="label">location</span>
+    <button class="chip"><span>📍</span> Rye <span style="opacity:0.6;">▾</span></button>
+    <button class="chip"><span>📍</span> Scarsdale <span style="opacity:0.6;">▾</span></button>
+  </div>
+  <div class="row"><span class="label">category</span>
+    <button class="chip">Beauty</button>
+    <button class="chip focused">Home</button>
+    <button class="chip">Pets</button>
+  </div>
+  <div class="row"><span class="label">signal</span>
+    <span class="pill trust">👤 2 friends use</span>
+    <span class="pill lock">🔒 Private</span>
+    <span class="pill cat">Beauty · Rye</span>
+  </div>
+</body>
+</html>

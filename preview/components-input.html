@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Components — Input field</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 22px; background: #18181b; font-family: 'Lora', serif; color: #fff; display: flex; flex-direction: column; gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .lbl { font-size: 11px; font-weight: 500; color: #a1a1aa; }
+  input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); color: #fff; font-family: 'Lora', serif; font-size: 14px; padding: 10px 14px; border-radius: 12px; outline: none; transition: border 200ms; }
+  input::placeholder { color: #52525b; }
+  input:focus { border-color: rgba(255,255,255,0.40); }
+  .search { position: relative; }
+  .search input { padding-left: 36px; }
+  .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #71717a; }
+</style>
+</head>
+<body>
+  <div class="field"><label class="lbl">Your name</label><input placeholder="e.g. Jamie Doe"/></div>
+  <div class="field"><label class="lbl">Search providers</label>
+    <div class="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="barber, plumber, tutor…"/>
+    </div>
+  </div>
+</body>
+</html>

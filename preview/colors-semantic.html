@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Color — Semantic signals</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 22px; background: #18181b; font-family: var(--ic-font-serif); color: #fff; }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sig { padding: 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); }
+  .dot { width: 28px; height: 28px; border-radius: 9999px; margin-bottom: 10px; }
+  .n { font-size: 12px; font-weight: 600; }
+  .h { font-size: 11px; font-family: var(--ic-font-mono); color: #71717a; margin-top: 2px; }
+  .u { font-size: 11px; color: #a1a1aa; margin-top: 6px; line-height: 1.4; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sig"><div class="dot" style="background:#10b981;"></div><div class="n">Trust</div><div class="h">#10b981</div><div class="u">"Your friends use this"</div></div>
+    <div class="sig"><div class="dot" style="background:#71717a;"></div><div class="n">Lock / Private</div><div class="h">#71717a</div><div class="u">Hidden services</div></div>
+    <div class="sig"><div class="dot" style="background:#f59e0b;"></div><div class="n">Warn</div><div class="h">#f59e0b</div><div class="u">Needs attention</div></div>
+    <div class="sig"><div class="dot" style="background:#ef4444;"></div><div class="n">Danger</div><div class="h">#ef4444</div><div class="u">Destructive / errors</div></div>
+  </div>
+</body>
+</html>

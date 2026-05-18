@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Components — Avatars & orbs</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 24px; background: #18181b; color: #fff; font-family: 'Lora', serif; }
+  .row { display: flex; gap: 14px; align-items: center; margin-bottom: 16px; }
+  .label { font-family: var(--ic-font-mono); font-size: 10px; color: #71717a; width: 90px; flex-shrink: 0; }
+  .avatar { border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; ring: 2px solid rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.1); }
+  .a-sm { width: 32px; height: 32px; font-size: 12px; }
+  .a-md { width: 44px; height: 44px; font-size: 14px; }
+  .a-lg { width: 64px; height: 64px; font-size: 18px; }
+  .center { width: 72px; height: 72px; background: #fff; color: #18181b; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 18px; }
+  .orb { width: 44px; height: 44px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: #fff; }
+  .orb svg { width: 18px; height: 18px; }
+  .orb-locked { background: rgba(82,82,91,0.6); border: 1px solid rgba(82,82,91,0.4); }
+</style>
+</head>
+<body>
+  <div class="row"><span class="label">initials</span>
+    <div class="avatar a-sm" style="background:#3f3f46;">SC</div>
+    <div class="avatar a-md" style="background:linear-gradient(135deg,#fb7185,#f43f5e);">LK</div>
+    <div class="avatar a-lg" style="background:linear-gradient(135deg,#34d399,#10b981);">MR</div>
+  </div>
+  <div class="row"><span class="label">you</span>
+    <div class="center">JD</div>
+    <span style="font-size:12px;color:#a1a1aa;">white disc, you in the middle of the orbit</span>
+  </div>
+  <div class="row"><span class="label">service orb</span>
+    <div class="orb" style="background:#fff;color:#18181b;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div>
+    <div class="orb" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg></div>
+    <div class="orb orb-locked"><svg viewBox="0 0 24 24" fill="none" stroke="#a1a1aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+  </div>
+</body>
+</html>
